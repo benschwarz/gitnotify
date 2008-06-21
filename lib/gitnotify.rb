@@ -15,11 +15,12 @@ class GitNotify
 	private
 	def self.enable_notify
     exit_with! "You're not within a git repository" unless git_repo?
-    exit_with! "You've already enabled the hook" if applied_hook?
-    File.open(post_commit, "w+") do |f|
-      f << File.read(post_commit_script)
-    end
     FileUtils.chmod 0775, post_commit
+    unless applied_hook?
+      File.open(post_commit, "w+") do |f|
+        f << File.read(post_commit_script)
+      end
+    end
     puts "Gitnotify: Enabled post-commit"
   end
 	

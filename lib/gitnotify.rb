@@ -30,7 +30,22 @@ class GitNotify
 	end
 	
 	def self.help
-	  puts "No docs yet, What a queer"
+	  puts <<-END
+
+=========================
+Gitnotify, railscamp love
+=========================
+
+  Tell your peeps about your commits using growl
+	      
+  Usage: (from within a git repo): gitnotify <command>
+	        
+  enable-hook
+	  Enables a post-commit hook
+      
+  disable-hook
+    Disables a post-commit hook
+END
   end
   
   def self.git_repo?

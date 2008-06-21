@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require 'rubygems'
-require 'gitnotify'
+
+require File.join(File.dirname(__FILE__), "..", "lib", "gitnotify")
 
 trap "INT" do
   exit!

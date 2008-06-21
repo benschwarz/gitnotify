@@ -14,16 +14,13 @@ class GitNotify
 
 	private
 	def self.enable_notify
-		if git_repo?
-		  FileUtils.chmod 0775, post_commit
-		  
-		  cmd = File.read(File.join(__FILE__, "..", "supports", "post-commit"))
-		  
-      append_to_file_if_missing(post_commit, cmd)
-      growl "Gitnotify", "Enabled post-commit"
-	  else
-	    exit_with! "You're not within a git repository"
-    end
+	  exit_with! "You're not within a git repository" unless git_repo?
+    exit_with! "You've already enabled the hook" if applied_hook?
+	  File.open(post_commit, "w+") do |f|
+	    f << File.read(post_commit_script)
+	  end
+	  FileUtils.chmod 0775, post_commit
+    growl "Gitnotify", "Enabled post-commit"
 	end
 	
 	def self.disable_notify
@@ -39,6 +36,10 @@ class GitNotify
     File.exists?(repo_path)
   end
   
+  def self.applied_hook?
+    File.read(post_commit).include?('growlnotify')
+  end
+  
   # Just a standard helper
   def self.repo_path
     File.join(Dir.pwd, ".git")
@@ -48,6 +49,10 @@ class GitNotify
     File.join(repo_path, "hooks", "post-commit")
   end
   
+  def self.post_commit_script
+    File.join(__FILE__, "..", "supports", "post-commit")
+  end
+  
   def self.growl(title, message)
     system "growlnotify -t #{title} -m #{message}"
   end
@@ -55,16 +60,5 @@ class GitNotify
   def self.exit_with!(message)
     STDERR.puts message
     exit!
-  end
-  
-  # Pinched from deprec / capistrano_extensions.rb
-  def self.append_to_file_if_missing(filename, value, options={})
-    system <<-END
-    sh -c '
-    grep -F "#{value}" #{filename} > /dev/null 2>&1 || 
-    test ! -f #{filename} ||
-    echo "#{value}" >> #{filename}
-    '
-    END
   end
 end

@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://railscamp.net"
   s.description = s.summary
   s.authors = ["Ben Schwarz", "Tim Lucas"]
-  s.files = Dir.glob("{supports/*, lib/**/*.rb}")
+  s.files = ["bin/gitnotify", "lib/gitnotify.rb", "supports/post-commit"]
   s.require_path = "lib"
   s.executables = "gitnotify"
 end

@@ -50,7 +50,7 @@ class GitNotify
   end
   
   def self.post_commit_script
-    File.join(__FILE__, "..", "supports", "post-commit")
+    File.join(File.dirname(__FILE__), "..", "supports", "post-commit")
   end
   
   def self.growl(title, message)

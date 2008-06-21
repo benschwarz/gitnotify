@@ -20,7 +20,7 @@ class GitNotify
 		  cmd = File.read(File.join(__FILE__, "..", "supports", "post-commit"))
 		  
       append_to_file_if_missing(post_commit, cmd)
-      growl "Gitnotify", "Enabled post-commit"
+      exit_with "Gitnotify: Enabled post-commit"
 	  else
 	    exit_with! "You're not within a git repository"
     end
@@ -28,11 +28,11 @@ class GitNotify
 	
 	def self.disable_notify
 	  FileUtils.chmod 0664, post_commit
-	  growl "Gitnotify", "Disabled post-commit"
+	  exit_with! "Gitnotify: Disabled post-commit"
 	end
 	
 	def self.help
-	  growl "No docs yet", "What a queer"
+	  puts "No docs yet, What a queer"
   end
   
   def self.git_repo?
@@ -46,10 +46,6 @@ class GitNotify
   
   def self.post_commit
     File.join(repo_path, "hooks", "post-commit")
-  end
-  
-  def self.growl(title, message)
-    system "growlnotify -t #{title} -m #{message}"
   end
   
   def self.exit_with!(message)

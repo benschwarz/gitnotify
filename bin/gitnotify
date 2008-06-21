@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'gitjour'
+require 'gitnotify'
 
 trap "INT" do
   exit!

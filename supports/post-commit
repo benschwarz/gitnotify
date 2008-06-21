@@ -1,0 +1,3 @@
+reponame=`basename $GIT_WORK_TREE`
+message=`git-log --text -n 1 --pretty=format:"%an commited '%s'"`
+/usr/local/bin/growlnotify -t "$reponame" -d "$reponame" -m "$message" --host 255.255.255.255 --udp

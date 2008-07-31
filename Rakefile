@@ -13,6 +13,9 @@ task :install_gem => :gem do
   Dir.chdir(GEM_DIR) do
     `sudo gem install *.gem`
   end
+  puts "***********************"
   puts "gitnotify gem installed"
-  puts "gitnotify enable-hook in a git repositoy to install the post-commit hook to enable Growl broadcasts"
+  puts "***********************"
+  puts ""
+  puts "run 'gitnotify enable-hook' from within a git repository to install a post-commit hook to that will enable Growl broadcasts"
 end

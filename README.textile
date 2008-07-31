@@ -1,0 +1,17 @@
+h1. Gitnotify, railscamp love
+
+Tell your peeps about your commits using growl
+
+h2. Usage: (from within a git repo): gitnotify <command>
+
+  run 'gitnotify enable-hook' from within a git repository to install a post-commit hook to that will enable Growl broadcasts
+  
+* enable-hook
+  Enables a post-commit hook
+      
+* disable-hook
+  Disables a post-commit hook
+
+
+Built at Railscamp June 08
+

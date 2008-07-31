@@ -5,14 +5,13 @@ Tell your peeps about your commits using growl
 h2. Usage: (from within a git repo): gitnotify <command>
 
 run from within a git repository to install a post-commit hook to that will enable Growl broadcasts
+
   'gitnotify enable-hook' 
 
 h3. Commands
-* enable-hook
-Enables a post-commit hook
-      
-* disable-hook
-  Disables a post-commit hook
+
+* enable-hook (Enables a post-commit hook)
+* disable-hook (Disables a post-commit hook)
 
 
 Built at Railscamp June 08

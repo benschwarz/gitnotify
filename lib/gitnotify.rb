@@ -15,6 +15,7 @@ class GitNotify
 	private
 	def self.enable_notify
     exit_with! "You're not within a git repository" unless git_repo?
+    FileUtils.touch post_commit
     FileUtils.chmod 0775, post_commit
     unless applied_hook?
       File.open(post_commit, "w+") do |f|
